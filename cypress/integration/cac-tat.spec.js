@@ -24,4 +24,16 @@ describe("CAT TAT Testes", () => {
         expect(input[0].files[0].name).to.equal("example.json");
       });
   });
+
+  it("seleciona um arquivo utilizado uma fixture ao qual foi dado um alias", () => {
+    cy.fixture("example.json").as("sampleFile");
+    cy.get("#file-upload")
+      .should("not.have.value")
+      .selectFile("@sampleFile", {
+        action: "drag-drop",
+      })
+      .should((input) => {
+        expect(input[0].files[0].name).to.equal("example.json");
+      });
+  });
 });
