@@ -37,8 +37,16 @@ describe("CAT TAT Testes", () => {
       });
   });
 
-  it("verifica que a politica de privacidade abre em outra abra com o clique", () => {
+  it("verifica que a politica de privacidade abre em outra aba com o clique", () => {
+    cy.get("#privacy a").should("have.attr", "target", "_blank");
+  });
+
+  it("verifica que a politica de privacidade abre em outra aba removendo o target e clicando no link", () => {
     cy.get("#privacy a")
-      .should("have.attr", "target", "_blank");
+      .invoke("removeAttr", "target")
+      .click()
+      .get("#title")
+      .contains("CAC TAT - Política de privacidade")
+      .should("be.visible");
   });
 });
