@@ -67,4 +67,13 @@ describe("CAT TAT Testes", () => {
       () => cy.get(".success").should("not.be.visible")
     );
   });
+
+  it.only("exibe e esconte as mensagens de sucesso usando o .invoke", () => {
+    cy.get(".success")
+      .should("not.be.visible")
+      .invoke("show")
+      .should("be.visible")
+      .invoke("hide")
+      .should("not.be.visible");
+  });
 });
