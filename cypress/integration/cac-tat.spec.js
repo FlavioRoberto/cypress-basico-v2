@@ -68,12 +68,17 @@ describe("CAT TAT Testes", () => {
     );
   });
 
-  it.only("exibe e esconte as mensagens de sucesso usando o .invoke", () => {
+  it("exibe e esconte as mensagens de sucesso usando o .invoke", () => {
     cy.get(".success")
       .should("not.be.visible")
       .invoke("show")
       .should("be.visible")
       .invoke("hide")
       .should("not.be.visible");
+  });
+
+  it.only("preenche area de texto usando invoke", () => {
+    const text = Cypress._.repeat("teste", 20);
+    cy.get("#open-text-area").invoke("val", text).should("have.value", text);
   });
 });
