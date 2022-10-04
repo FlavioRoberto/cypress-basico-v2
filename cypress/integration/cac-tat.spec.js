@@ -49,4 +49,22 @@ describe("CAT TAT Testes", () => {
       .contains("CAC TAT - Política de privacidade")
       .should("be.visible");
   });
+
+  it("preenche os campos obrigatórios e envia o formulário", () => {
+    const longText =
+      "Nostrud excepteur anim sunt adipisicing eu proident sit tempor labore incididunt laborum officia.";
+
+    cy.tickCallback(
+      3000,
+      () => {
+        cy.typeValue("#firstName", "Flávio Roberto");
+        cy.typeValue("#lastName", "Flávio Roberto");
+        cy.typeValue("#email", "flavio.roberto@email.com");
+        cy.typeValue("#open-text-area", longText, { delay: 0 });
+        cy.contains("button", "Enviar").click();
+        cy.get(".success").should("be.visible");
+      },
+      () => cy.get(".success").should("not.be.visible")
+    );
+  });
 });
